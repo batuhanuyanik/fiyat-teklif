@@ -190,15 +190,20 @@
     <div class="footer">
       <p><strong>Notlar:</strong> <span id="notes"></span></p>
     </div>
-    <p>Banka Bilgilerimiz</p>
+    <p><strong>Banka Bilgilerimiz:</strong> <br> Banka Adı: Garanti BBVA Bankası <br> Hesap Sahibi: Dekar Metal TİC. VE SAN. LTD. ŞTİ. <br> Hesap Numarası: TR11 0006 2240 0006 2915 99 (TRY)</p>
   </div>
   <script>
     const data = JSON.parse(localStorage.getItem('invoice_data'));
 
-    document.getElementById('invoice_id').textContent = `Teklif No: ${data.invoice_id}`;
-    document.getElementById('date').textContent = data.date;
-    document.getElementById('customer_name').textContent = data.customer_name;
-    document.getElementById('email').textContent = data.contact;
+        document.getElementById('invoice_id').textContent = `Teklif No: ${data.invoice_id}`;
+        document.getElementById('date').textContent = data.date;
+        document.getElementById('customer_name').textContent = data.customer_name;
+        document.getElementById('email').textContent = data.email;
+        document.getElementById('address').textContent = data.address;
+        document.getElementById('telephone').textContent = data.telephone;
+        document.getElementById('vergi_dairesi').textContent = data.vergi_dairesi;
+        document.getElementById('vkn').textContent = data.vkn;
+        document.getElementById('notes').textContent = data.notes;
 
     const tbody = document.getElementById('items_tbody');
     let subtotal = 0;
