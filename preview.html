@@ -10,15 +10,24 @@
       --accent: #0b9add;
       --bg: #f9fafb;
       --border: #e5e7eb;
+      --font-size-base: 14px;
+      --font-size-small: 12px;
+      --font-size-large: 16px;
+      --font-size-title: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
     }
 
     body {
-      font-family: system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--primary);
       margin: 0;
       padding: 1rem;
-      font-size: 0.9rem;
+      font-size: var(--font-size-base);
+      line-height: 1.4;
     }
 
     .container {
@@ -38,25 +47,28 @@
       border-bottom: 2px solid var(--border);
       padding-bottom: 1rem;
       margin-bottom: 1rem;
+      gap: 1rem;
     }
 
     .po-title {
-      font-size: 1.5rem;
+      font-size: var(--font-size-title);
       font-weight: 600;
       color: var(--accent);
+      margin: 0;
     }
 
     .section {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .section h3 {
-      font-size: 1rem;
+      font-size: var(--font-size-large);
       border-left: 4px solid var(--accent);
       padding-left: 0.5rem;
-      margin-bottom: 0.5rem;
+      margin: 0 0 0.75rem 0;
       border-bottom: 2px solid var(--border);
       padding-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .info {
@@ -70,37 +82,49 @@
     }
 
     .info-column p {
-      margin: 0.3rem 0;
+      margin: 0.25rem 0;
+      font-size: var(--font-size-base);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
+      font-size: var(--font-size-base);
     }
 
     th {
       background: var(--accent);
       color: white;
       text-align: center;
-      padding: 0.75rem;
+      padding: 0.75rem 0.5rem;
+      font-size: var(--font-size-base);
+      font-weight: 600;
     }
 
     td {
-      padding: 0.75rem;
+      padding: 0.75rem 0.5rem;
       border-bottom: 1px solid var(--border);
       text-align: center;
+      font-size: var(--font-size-base);
     }
 
     tfoot td {
       background: #f3f4f6;
+      font-size: var(--font-size-base);
+      font-weight: 500;
     }
 
     .footer {
       background: #f3f4f6;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       padding: 1rem;
       border-radius: 8px;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: var(--font-size-base);
     }
 
     .bank-info {
@@ -108,6 +132,12 @@
       margin-top: 1rem;
       padding: 1rem;
       border-radius: 8px;
+    }
+
+    .bank-info p {
+      margin: 0;
+      font-size: var(--font-size-base);
+      line-height: 1.5;
     }
 
     .print-btn {
@@ -119,11 +149,96 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-size: var(--font-size-base);
+      font-weight: 500;
+    }
+
+    .print-btn:hover {
+      background: #0989c7;
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      :root {
+        --font-size-base: 13px;
+        --font-size-small: 11px;
+        --font-size-large: 15px;
+        --font-size-title: 16px;
+      }
+
+      body {
+        padding: 0.5rem;
+      }
+
+      .container {
+        padding: 1rem;
+        border-radius: 8px;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .info {
+        flex-direction: column;
+      }
+
+      .info-column {
+        flex: 1 1 auto;
+      }
+
+      table {
+        font-size: var(--font-size-small);
+      }
+
+      th, td {
+        padding: 0.5rem 0.25rem;
+        font-size: var(--font-size-small);
+      }
+
+      .footer, .bank-info {
+        padding: 0.75rem;
+        font-size: var(--font-size-small);
+      }
+
+      .footer p, .bank-info p {
+        font-size: var(--font-size-small);
+      }
+    }
+
+    /* iPhone specific optimizations */
+    @media (max-width: 428px) {
+      :root {
+        --font-size-base: 12px;
+        --font-size-small: 10px;
+        --font-size-large: 14px;
+        --font-size-title: 15px;
+      }
+
+      .container {
+        padding: 0.75rem;
+      }
+
+      th, td {
+        padding: 0.4rem 0.2rem;
+      }
     }
 
     @media print {
       .print-btn {
         display: none;
+      }
+      
+      body {
+        background: white;
+        padding: 0;
+      }
+      
+      .container {
+        box-shadow: none;
+        border-radius: 0;
       }
     }
   </style>
