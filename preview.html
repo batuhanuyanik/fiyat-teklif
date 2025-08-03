@@ -6,122 +6,112 @@
   <title>Teklif Önizleme</title>
   <style>
     :root {
-      --primary-color: #1f2937;
-      --accent-color: #0b9add;
-      --bg-color: #f9fafb;
-      --border-color: #e5e7eb;
+      --primary: #1f2937;
+      --accent: #0b9add;
+      --bg: #f9fafb;
+      --border: #e5e7eb;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-color);
-      font-size: 0.7rem;
-      color: var(--primary-color);
-      padding: 40px;
+      font-family: system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
       margin: 0;
+      padding: 1rem;
+      font-size: 0.9rem;
     }
 
     .container {
       max-width: 800px;
-      font-size: 0.65rem !important;
       margin: auto;
-      background: white;
-      padding: 40px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      background: #fff;
+      padding: 1.5rem;
       border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .header {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 20px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
     }
 
     .po-title {
-      font-size: 28px;
+      font-size: 1.5rem;
       font-weight: 600;
-      color: var(--accent-color);
+      color: var(--accent);
     }
 
     .section {
-      margin-top: 30px;
+      margin-top: 2rem;
     }
 
     .section h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-      border-left: 4px solid var(--accent-color);
-      padding-left: 10px;
-      color: var(--primary-color);
+      font-size: 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .info {
       display: flex;
-      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .info-column {
-      width: 48%;
+      flex: 1 1 300px;
     }
 
     .info-column p {
-      margin: 6px 0;
+      margin: 0.3rem 0;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 15px;
+      margin-top: 1rem;
     }
 
     th {
-      background-color: var(--accent-color);
+      background: var(--accent);
       color: white;
-      padding: 12px;
       text-align: left;
+      padding: 0.75rem;
+      font-size: 0.9rem;
     }
 
     td {
-      padding: 12px;
-      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
     }
 
     tfoot td {
-      background-color: #f3f4f6;
-      padding: 4px 6px;
-      font-weight: 600;
-      font-size: 0.65rem;
+      font-weight: bold;
+      background: #f3f4f6;
     }
 
     .footer {
-        margin-top: 40px;
-        padding: 10px !important;
-        font-size: 0.65rem !important;
-        font-weight: 400 !important;
-        color: #374151;
-        background-color: #f3f4f6;
-        border-radius: 8px;
-        box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.05);
+      background: #f3f4f6;
+      margin-top: 2rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
     }
-
-    .footer p {
-        margin: 4px 0 !important;
-        font-size: 0.65rem !important;
-    }
-
 
     .print-btn {
       display: block;
-      margin: 20px auto;
-      padding: 10px 20px;
-      background: var(--accent-color);
+      margin: 1rem auto;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
       color: white;
       border: none;
       border-radius: 5px;
-      font-size: 16px;
+      font-size: 1rem;
       cursor: pointer;
     }
 
@@ -137,34 +127,32 @@
   <button class="print-btn" onclick="downloadPDF()">PDF İndir</button>
   <div class="container" id="invoice_container">
     <div class="header">
-      <div><img src="logo.png" alt="Logo" style="height: 60px;" /></div>
+      <img src="logo.png" alt="Logo" style="height: 50px" />
       <div style="text-align: right;">
-    <div class="po-title" id="invoice_id"></div>
-    <div style="font-size: 14px; color: #6b7280; margin-top: 10px;"><strong>Tarih:</strong> <span id="date"></span></div>
-  </div>
+        <div class="po-title" id="invoice_id"></div>
+        <div><strong>Tarih:</strong> <span id="date"></span></div>
+      </div>
     </div>
 
-    <div class="section">
-      <div class="info">
-        <div class="info-column">
-            <h3>Müşteri Bilgileri</h3>
-          <p><strong>Firma Adı:</strong> <span id="customer_name"></span></p>
-          <p><strong>Adres:</strong> <span id="address"></span></p>
-          <p><strong>Telefon:</strong> <span id="telephone"></span></p>
-          <p><strong>E-mail:</strong> <span id="email"></span></p>
-          <p><strong>Vergi Dairesi:</strong> <span id="vergi_dairesi"></span></p>
-          <p><strong>VKN:</strong> <span id="vkn"></span></p>
-        </div>
-        <div class="info-column">
+    <div class="section info">
+      <div class="info-column">
+        <h3>Müşteri Bilgileri</h3>
+        <p><strong>Firma Adı:</strong> <span id="customer_name"></span></p>
+        <p><strong>Adres:</strong> <span id="address"></span></p>
+        <p><strong>Telefon:</strong> <span id="telephone"></span></p>
+        <p><strong>E-mail:</strong> <span id="email"></span></p>
+        <p><strong>Vergi Dairesi:</strong> <span id="vergi_dairesi"></span></p>
+        <p><strong>VKN:</strong> <span id="vkn"></span></p>
+      </div>
+      <div class="info-column">
         <h3>Firma Bilgileri</h3>
-          <p><strong>Firma:</strong> Dekar Metal TİC. VE SAN. LTD. ŞTİ.</p>
-          <p><strong>Adres:</strong> Kayabaşı Mah. 1729. Sok. No:6</p>
-          <p>34000 Başakşehir/İstanbul</p>
-          <p><strong>Telefon:</strong> +90 532 623 63 52</p>
-          <p><strong>E-posta:</strong> info@dekarmetal.com</p>
-          <p><strong>Vergi Dairesi:</strong> Başakşehir Vergi Dairesi</p>
-          <p><strong>VKN:</strong> 8880034582</p>
-        </div>
+        <p><strong>Firma:</strong> Dekar Metal TİC. VE SAN. LTD. ŞTİ.</p>
+        <p><strong>Adres:</strong> Kayabaşı Mah. 1729. Sok. No:6</p>
+        <p>34000 Başakşehir/İstanbul</p>
+        <p><strong>Telefon:</strong> +90 532 623 63 52</p>
+        <p><strong>E-posta:</strong> info@dekarmetal.com</p>
+        <p><strong>Vergi Dairesi:</strong> Başakşehir</p>
+        <p><strong>VKN:</strong> 8880034582</p>
       </div>
     </div>
 
@@ -181,74 +169,75 @@
         <tbody id="items_tbody"></tbody>
         <tfoot>
           <tr>
-            <td colspan="3" style="text-align: right;"><strong>Ara Toplam</strong></td>
+            <td colspan="3" style="text-align: right;">Ara Toplam</td>
             <td id="subtotal"></td>
           </tr>
           <tr>
-            <td colspan="3" style="text-align: right;"><strong>KDV (%20)</strong></td>
+            <td colspan="3" style="text-align: right;">KDV (%20)</td>
             <td id="tax"></td>
           </tr>
           <tr>
-            <td colspan="3" style="text-align: right;"><strong>Genel Toplam (KDV Dahil)</strong></td>
+            <td colspan="3" style="text-align: right;">Genel Toplam</td>
             <td id="grand_total"></td>
           </tr>
         </tfoot>
       </table>
     </div>
+
     <div class="footer">
       <p><strong>Notlar:</strong> <span id="notes"></span></p>
     </div>
-    <p><strong>Banka Bilgilerimiz:</strong> 
-        <br> Banka Adı: Garanti BBVA Bankası 
-        <br> Hesap Sahibi: Dekar Metal TİC. VE SAN. LTD. ŞTİ. 
-        <br> Hesap Numarası: TR11 0006 2240 0006 2915 99 (TRY)
-    </p>
+    <p><strong>Banka Bilgilerimiz:</strong><br>
+        Garanti BBVA Bankası<br>
+        Dekar Metal TİC. VE SAN. LTD. ŞTİ.<br>
+        IBAN: TR11 0006 2240 0006 2915 99 (TRY)
+      </p>
   </div>
-  <script>
-    const data = JSON.parse(localStorage.getItem('invoice_data'));
 
-        document.getElementById('invoice_id').textContent = `Teklif No: ${data.invoice_id}`;
-        document.getElementById('date').textContent = data.date;
-        document.getElementById('customer_name').textContent = data.customer_name;
-        document.getElementById('email').textContent = data.email;
-        document.getElementById('address').textContent = data.address;
-        document.getElementById('telephone').textContent = data.telephone;
-        document.getElementById('vergi_dairesi').textContent = data.vergi_dairesi;
-        document.getElementById('vkn').textContent = data.vkn;
-        document.getElementById('notes').textContent = data.notes;
+  <script>
+    const data = JSON.parse(localStorage.getItem('invoice_data') || '{}');
+
+    document.getElementById('invoice_id').textContent = `Teklif No: ${data.invoice_id || ''}`;
+    document.getElementById('date').textContent = data.date || '';
+    document.getElementById('customer_name').textContent = data.customer_name || '';
+    document.getElementById('email').textContent = data.email || '';
+    document.getElementById('address').textContent = data.address || '';
+    document.getElementById('telephone').textContent = data.telephone || '';
+    document.getElementById('vergi_dairesi').textContent = data.vergi_dairesi || '';
+    document.getElementById('vkn').textContent = data.vkn || '';
+    document.getElementById('notes').textContent = data.notes || '';
 
     const tbody = document.getElementById('items_tbody');
     let subtotal = 0;
 
-    data.items.forEach(item => {
+    (data.items || []).forEach(([name, qty, price, total]) => {
       const row = document.createElement('tr');
       row.innerHTML = `
-        <td>${item[0]}</td>
-        <td>${item[1]}</td>
-        <td>₺${item[2].toFixed(2)}</td>
-        <td>₺${item[3].toFixed(2)}</td>
+        <td>${name}</td>
+        <td>${qty}</td>
+        <td>₺${price.toFixed(2)}</td>
+        <td>₺${total.toFixed(2)}</td>
       `;
       tbody.appendChild(row);
-      subtotal += item[3];
+      subtotal += total;
     });
 
-    const tax = subtotal * 0.20;
-    const totalWithTax = subtotal + tax;
+    const tax = subtotal * 0.2;
+    const grand = subtotal + tax;
 
     document.getElementById('subtotal').textContent = `₺${subtotal.toFixed(2)}`;
     document.getElementById('tax').textContent = `₺${tax.toFixed(2)}`;
-    document.getElementById('grand_total').textContent = `₺${totalWithTax.toFixed(2)}`;
+    document.getElementById('grand_total').textContent = `₺${grand.toFixed(2)}`;
 
     function downloadPDF() {
       const element = document.getElementById('invoice_container');
       const opt = {
         margin: 0.5,
-        filename: `${data.invoice_id}.pdf`,
+        filename: `${data.invoice_id || 'teklif'}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 3, useCORS: true },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas: { scale: 3 },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
       };
-
       html2pdf().set(opt).from(element).save();
     }
   </script>
