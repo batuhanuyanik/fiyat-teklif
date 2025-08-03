@@ -46,29 +46,29 @@
 </head>
 <body>
   <div class="container">
-    <h1>Create Price Bid</h1>
-    <label>Invoice ID <input type="text" id="invoice_id" /></label>
-    <label>Date <input type="date" id="date" /></label>
-    <label>Customer Name <input type="text" id="customer_name" /></label>
-    <label>Contact Info <input type="text" id="contact" /></label>
+    <h1>Fiyat Teklifi Oluştur</h1>
+    <label>Fiyat Teklif No <input type="text" id="invoice_id" /></label>
+    <label>Tarih <input type="date" id="date" /></label>
+    <label>Firma Adı <input type="text" id="customer_name" /></label>
+    <label>Yetkili E-Mail <input type="text" id="contact" /></label>
 
     <h2>Items</h2>
     <table id="items_table">
       <thead>
         <tr>
-          <th>Product</th>
-          <th>Qty</th>
-          <th>Unit Price</th>
-          <th>Total</th>
+          <th>Ürün</th>
+          <th>Adet</th>
+          <th>Birim Fiyat</th>
+          <th>Toplam</th>
           <th></th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-    <button onclick="addItem()">Add Item</button>
+    <button onclick="addItem()">Ürün Ekle</button>
 
     <div class="actions">
-      <button onclick="saveAndPreview()">Preview Invoice</button>
+      <button onclick="saveAndPreview()">Teklifi Gör</button>
     </div>
   </div>
 
