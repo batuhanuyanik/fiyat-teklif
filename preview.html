@@ -56,7 +56,16 @@
       color: var(--primary-color);
     }
 
-    .info p {
+    .info {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .info-column {
+      width: 48%;
+    }
+
+    .info-column p {
       margin: 6px 0;
     }
 
@@ -113,19 +122,31 @@
   <button class="print-btn" onclick="downloadPDF()">PDF İndir</button>
   <div class="container" id="invoice_container">
     <div class="header">
-      <div>
-  <img src="https://www.dekarmetal.com/trex/assets/img/genel/27394.jpg" alt="Logo" style="height: 60px;" />
-</div>
-
-      <div class="po-title" id="invoice_id"></div>
+      <div><img src="logo.png" alt="Logo" style="height: 60px;" /></div>
+      <div style="text-align: right;">
+    <div class="po-title" id="invoice_id"></div>
+    <div style="font-size: 14px; color: #6b7280; margin-top: 10px;"><strong>Tarih:</strong> <span id="date"></span></div>
+  </div>
     </div>
 
     <div class="section">
-      <h3>Sipariş Bilgileri</h3>
       <div class="info">
-        <p><strong>Tarih:</strong> <span id="date"></span></p>
-        <p><strong>Müşteri:</strong> <span id="customer_name"></span></p>
-        <p><strong>İletişim:</strong> <span id="contact"></span></p>
+        <div class="info-column">
+            <h3>Müşteri Bilgileri</h3>
+          <p><strong>Tarih:</strong> <span id="date"></span></p>
+          <p><strong>Müşteri:</strong> <span id="customer_name"></span></p>
+          <p><strong>İletişim:</strong> <span id="contact"></span></p>
+        </div>
+        <div class="info-column">
+        <h3>Firma Bilgileri</h3>
+          <p><strong>Firma:</strong> Dekar Metal TİC. VE SAN. LTD. ŞTİ.</p>
+          <p><strong>Adres:</strong> Kayabaşı Mah. 1729. Sok. No:6</p>
+          <p>34000 Başakşehir/İstanbul</p>
+          <p><strong>Telefon:</strong> +90 532 623 63 52</p>
+          <p><strong>E-posta:</strong> info@dekarmetal.com</p>
+          <p><strong>Vergi Dairesi:</strong> Başakşehir Vergi Dairesi</p>
+          <p><strong>VKN:</strong> 8880034582</p>
+        </div>
       </div>
     </div>
 
@@ -143,7 +164,15 @@
         <tbody id="items_tbody"></tbody>
         <tfoot>
           <tr>
-            <td colspan="3" style="text-align: right;">Genel Toplam</td>
+            <td colspan="3" style="text-align: right;">Ara Toplam</td>
+            <td id="subtotal"></td>
+          </tr>
+          <tr>
+            <td colspan="3" style="text-align: right;">KDV (%20)</td>
+            <td id="tax"></td>
+          </tr>
+          <tr>
+            <td colspan="3" style="text-align: right;">Genel Toplam (KDV Dahil)</td>
             <td id="grand_total"></td>
           </tr>
         </tfoot>
@@ -165,6 +194,8 @@
     document.getElementById('contact').textContent = data.contact;
 
     const tbody = document.getElementById('items_tbody');
+    let subtotal = 0;
+
     data.items.forEach(item => {
       const row = document.createElement('tr');
       row.innerHTML = `
@@ -174,9 +205,15 @@
         <td>₺${item[3].toFixed(2)}</td>
       `;
       tbody.appendChild(row);
+      subtotal += item[3];
     });
 
-    document.getElementById('grand_total').textContent = `₺${data.total.toFixed(2)}`;
+    const tax = subtotal * 0.20;
+    const totalWithTax = subtotal + tax;
+
+    document.getElementById('subtotal').textContent = `₺${subtotal.toFixed(2)}`;
+    document.getElementById('tax').textContent = `₺${tax.toFixed(2)}`;
+    document.getElementById('grand_total').textContent = `₺${totalWithTax.toFixed(2)}`;
 
     function downloadPDF() {
       const element = document.getElementById('invoice_container');
@@ -184,7 +221,7 @@
         margin: 0.5,
         filename: `${data.invoice_id}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
+        html2canvas: { scale: 2, useCORS: true },
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
       };
 
