@@ -59,8 +59,12 @@
     <h1>Teklif Oluştur</h1>
     <label>Teklif Numarası <input type="text" id="invoice_id" /></label>
     <label>Tarih <input type="date" id="date" /></label>
-    <label>Müşteri Adı <input type="text" id="customer_name" /></label>
-    <label>İletişim Bilgisi <input type="text" id="contact" /></label>
+    <label>Müşteri Adı: <input type="text" id="customer_name" /></label>
+    <label>Adres: <input type="text" id="address" /></label>
+    <label>Telefon: <input type="text" id="telephone" /></label>
+    <label>E-mail: <input type="text" id="email" /></label>
+    <label>Vergi Dairesi: <input type="text" id="vergi_dairesi" /></label>
+    <label>VKN: <input type="text" id="vkn" /></label>
 
     <h2>Ürünler</h2>
     <table id="items_table">
@@ -115,9 +119,14 @@
     function saveAndPreview() {
       const data = {
         invoice_id: document.getElementById('invoice_id').value,
+        address: document.getElementById('address').value,
         date: document.getElementById('date').value,
+        telephone: document.getElementById('telephone').value,
         customer_name: document.getElementById('customer_name').value,
-        contact: document.getElementById('contact').value,
+        email: document.getElementById('email').value,
+        vergi_dairesi: document.getElementById('vergi_dairesi').value,
+        vkn: document.getElementById('vkn').value,
+        notes: document.getElementById('notes').value,
         items: [],
         total: 0
       };

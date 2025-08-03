@@ -15,6 +15,7 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
+      font-size: 12px;
       color: var(--primary-color);
       padding: 40px;
       margin: 0;
@@ -90,6 +91,7 @@
     tfoot td {
       font-weight: bold;
       background-color: #f3f4f6;
+      padding: 4px 8px;
     }
 
     .footer {
@@ -133,9 +135,12 @@
       <div class="info">
         <div class="info-column">
             <h3>Müşteri Bilgileri</h3>
-          <p><strong>Tarih:</strong> <span id="date"></span></p>
-          <p><strong>Müşteri:</strong> <span id="customer_name"></span></p>
-          <p><strong>İletişim:</strong> <span id="contact"></span></p>
+          <p><strong>Firma Adı:</strong> <span id="customer_name"></span></p>
+          <p><strong>Adres:</strong> <span id="address"></span></p>
+          <p><strong>Telefon:</strong> <span id="telephone"></span></p>
+          <p><strong>E-mail:</strong> <span id="email"></span></p>
+          <p><strong>Vergi Dairesi:</strong> <span id="vergi_dairesi"></span></p>
+          <p><strong>VKN:</strong> <span id="vkn"></span></p>
         </div>
         <div class="info-column">
         <h3>Firma Bilgileri</h3>
@@ -181,7 +186,6 @@
 
     <div class="footer">
       <p><strong>Notlar:</strong> Lütfen 7 iş günü içinde teslim ediniz.</p>
-      <p>İletişim: satinalma@sirketiniz.com</p>
     </div>
   </div>
 
@@ -191,7 +195,7 @@
     document.getElementById('invoice_id').textContent = `Teklif No: ${data.invoice_id}`;
     document.getElementById('date').textContent = data.date;
     document.getElementById('customer_name').textContent = data.customer_name;
-    document.getElementById('contact').textContent = data.contact;
+    document.getElementById('e-mail').textContent = data.contact;
 
     const tbody = document.getElementById('items_tbody');
     let subtotal = 0;
