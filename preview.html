@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invoice Preview</title>
+  <style>
+    :root {
+      --primary-color: #1f2937;
+      --accent-color: #2563eb;
+      --bg-color: #f9fafb;
+      --border-color: #e5e7eb;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+      padding: 40px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      border-radius: 10px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 20px;
+    }
+
+    .po-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 10px;
+      color: var(--primary-color);
+    }
+
+    .info p {
+      margin: 6px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 12px;
+      text-align: left;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    tfoot td {
+      font-weight: bold;
+      background-color: #f3f4f6;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .print-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="print-btn" onclick="window.print()">Print or Save as PDF</button>
+  <div class="container">
+    <div class="header">
+      <div><strong>Your Brand Logo</strong></div>
+      <div class="po-title" id="invoice_id"></div>
+    </div>
+
+    <div class="section">
+      <h3>Order Information</h3>
+      <div class="info">
+        <p><strong>Date:</strong> <span id="date"></span></p>
+        <p><strong>Customer:</strong> <span id="customer_name"></span></p>
+        <p><strong>Contact:</strong> <span id="contact"></span></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Order Items</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="items_tbody"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" style="text-align: right;">Grand Total</td>
+            <td id="grand_total"></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="footer">
+      <p><strong>Notes:</strong> Please deliver within 7 working days.</p>
+      <p>Contact: purchasing@yourcompany.com</p>
+    </div>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('invoice_data'));
+
+    document.getElementById('invoice_id').textContent = `Invoice #${data.invoice_id}`;
+    document.getElementById('date').textContent = data.date;
+    document.getElementById('customer_name').textContent = data.customer_name;
+    document.getElementById('contact').textContent = data.contact;
+
+    const tbody = document.getElementById('items_tbody');
+    data.items.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item[0]}</td>
+        <td>${item[1]}</td>
+        <td>₺${item[2].toFixed(2)}</td>
+        <td>₺${item[3].toFixed(2)}</td>
+      `;
+      tbody.appendChild(row);
+    });
+
+    document.getElementById('grand_total').textContent = `₺${data.total.toFixed(2)}`;
+  </script>
+</body>
+</html>
