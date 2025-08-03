@@ -7,7 +7,7 @@
   <style>
     :root {
       --primary-color: #1f2937;
-      --accent-color: #2563eb;
+      --accent-color: #0b9add;
       --bg-color: #f9fafb;
       --border-color: #e5e7eb;
     }
@@ -161,11 +161,10 @@
     </div>
 
     <div class="section">
-      <h3>Sipariş Ürünleri</h3>
       <table>
         <thead>
           <tr>
-            <th>Ürün</th>
+            <th>Ürün Adı</th>
             <th>Adet</th>
             <th>Birim Fiyat</th>
             <th>Toplam</th>
@@ -188,12 +187,11 @@
         </tfoot>
       </table>
     </div>
-
     <div class="footer">
       <p><strong>Notlar:</strong> <span id="notes"></span></p>
     </div>
+    <p>Banka Bilgilerimiz</p>
   </div>
-
   <script>
     const data = JSON.parse(localStorage.getItem('invoice_data'));
 
