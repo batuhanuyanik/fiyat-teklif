@@ -15,7 +15,7 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: var(--bg-color);
-      font-size: 12px;
+      font-size: 1rem;
       color: var(--primary-color);
       padding: 40px;
       margin: 0;
@@ -92,12 +92,13 @@
       font-weight: bold;
       background-color: #f3f4f6;
       padding: 4px 8px;
+      font-size: 1rem;
     }
 
     .footer {
         margin-top: 40px;
         padding: 15px;
-        font-size: 14px;
+        font-size: 1rem;
         color: #374151;
         background-color: #f3f4f6;
         border-radius: 8px;
@@ -190,7 +191,11 @@
     <div class="footer">
       <p><strong>Notlar:</strong> <span id="notes"></span></p>
     </div>
-    <p><strong>Banka Bilgilerimiz:</strong> <br> Banka Adı: Garanti BBVA Bankası <br> Hesap Sahibi: Dekar Metal TİC. VE SAN. LTD. ŞTİ. <br> Hesap Numarası: TR11 0006 2240 0006 2915 99 (TRY)</p>
+    <p><strong>Banka Bilgilerimiz:</strong> 
+        <br> Banka Adı: Garanti BBVA Bankası 
+        <br> Hesap Sahibi: Dekar Metal TİC. VE SAN. LTD. ŞTİ. 
+        <br> Hesap Numarası: TR11 0006 2240 0006 2915 99 (TRY)
+    </p>
   </div>
   <script>
     const data = JSON.parse(localStorage.getItem('invoice_data'));
